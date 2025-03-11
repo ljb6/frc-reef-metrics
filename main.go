@@ -3,6 +3,7 @@ package main
 import (
 	database "github.com/ljb6/frc-reef-metrics/db"
 	"github.com/ljb6/frc-reef-metrics/models"
+	router "github.com/ljb6/frc-reef-metrics/routes"
 )
 
 func main() {
@@ -18,4 +19,6 @@ func main() {
 	}
 
 	database.InsertData(test_data)
+
+	router.InitializeServer()
 }

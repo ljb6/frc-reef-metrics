@@ -50,4 +50,6 @@ func InsertData(data models.EventStats) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	log.Println("Data:", data, "added to DB")
 }
