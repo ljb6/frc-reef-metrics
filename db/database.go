@@ -31,13 +31,14 @@ func Migrate() {
 	CREATE TABLE IF NOT EXISTS reef_stats (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		event_key TEXT NOT NULL,
-		week, TEXT NOT NULL,
-		total_corals INTEGER NOT NULL,
+		week TEXT NOT NULL,
+		total_corals INTEGER NOT NULL
 	);
 	`
 	_, err := DB.Exec(query)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	log.Println("Migration done")
 }
