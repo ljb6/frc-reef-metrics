@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 
+	"github.com/ljb6/frc-reef-metrics/models"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -41,4 +42,12 @@ func Migrate() {
 	}
 
 	log.Println("Migration done")
+}
+
+func InsertData(data models.EventStats) {
+	query := "INSERT INTO reef_stats (event_key, week, total_corals) VALUES (?, ?, ?)"
+	_, err := DB.Exec(query, data.Event_key, data.Week, data.Total_corals)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
