@@ -33,7 +33,8 @@ func Migrate() {
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		event_key TEXT NOT NULL,
 		week TEXT NOT NULL,
-		total_corals INTEGER NOT NULL
+		auto_data TEXT NOT NULL,
+		teleop_data TEXT NOT NULL
 	);
 	`
 	_, err := DB.Exec(query)
@@ -45,8 +46,8 @@ func Migrate() {
 }
 
 func InsertData(data models.EventStats) {
-	query := "INSERT INTO reef_stats (event_key, week, total_corals) VALUES (?, ?, ?)"
-	_, err := DB.Exec(query, data.Event_key, data.Week, data.Total_corals)
+	query := "INSERT INTO reef_stats (event_key, week, auto_data, teleop_data) VALUES (?, ?, ?, ?)"
+	_, err := DB.Exec(query, data.Event_key, data.Week, data.Auto_data, data.Tele_data)
 	if err != nil {
 		log.Fatal(err)
 	}
