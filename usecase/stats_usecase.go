@@ -2,14 +2,14 @@ package usecase
 
 import "github.com/ljb6/frc-reef-metrics/models"
 
-type statsUsecase struct {
+type StatsUsecase struct {
 	//
 }
 
-func NewStatsUsecase() statsUsecase {
-	return statsUsecase{}
+func NewStatsUsecase() StatsUsecase {
+	return StatsUsecase{}
 }
 
-func (su *statsUsecase) GetMatches() ([]models.MatchStats, error) {
+func (su *StatsUsecase) GetMatches() ([]models.MatchStats, error) {
 	return nil, nil
 }

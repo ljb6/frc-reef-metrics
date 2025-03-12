@@ -3,11 +3,13 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/ljb6/frc-reef-metrics/controller"
+	"github.com/ljb6/frc-reef-metrics/usecase"
 )
 
 func initializeRoutes(router *gin.Engine) {
 
-	StatsController := controller.NewStatsController()
+	StatsUsecase := usecase.NewStatsUsecase()
+	StatsController := controller.NewStatsController(StatsUsecase)
 
 	// Endpoint
 	end := router.Group("/api/reef-metrics/v1")

@@ -5,14 +5,17 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/ljb6/frc-reef-metrics/models"
+	"github.com/ljb6/frc-reef-metrics/usecase"
 )
 
 type StatsController struct {
-	// 
+	statsUsecase usecase.StatsUsecase
 }
 
-func NewStatsController() StatsController {
-	return StatsController{}
+func NewStatsController(usecase usecase.StatsUsecase) StatsController {
+	return StatsController{
+		statsUsecase: usecase,
+	}
 }
 
 func (r *StatsController) GetMatches(ctx *gin.Context) {
