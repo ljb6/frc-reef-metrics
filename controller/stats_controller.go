@@ -16,7 +16,7 @@ func NewStatsController() StatsController {
 }
 
 func (r *StatsController) GetMatches(ctx *gin.Context) {
-	stats := []models.RobotMatchStats{
+	stats := []models.MatchStats{
 		{
 			Name:        "John Doe",
 			Email:       "john.doe@example.com",
