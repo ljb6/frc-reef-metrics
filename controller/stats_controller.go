@@ -7,15 +7,15 @@ import (
 	"github.com/ljb6/frc-reef-metrics/models"
 )
 
-type robotStatsController struct {
+type StatsController struct {
 	// 
 }
 
-func NewRobotStatsController() robotStatsController {
-	return robotStatsController{}
+func NewStatsController() StatsController {
+	return StatsController{}
 }
 
-func (r *robotStatsController) GetMatches(ctx *gin.Context) {
+func (r *StatsController) GetMatches(ctx *gin.Context) {
 	stats := []models.RobotMatchStats{
 		{
 			Name:        "John Doe",

@@ -7,7 +7,7 @@ import (
 
 func initializeRoutes(router *gin.Engine) {
 
-	StatsController := controller.NewRobotStatsController()
+	StatsController := controller.NewStatsController()
 
 	// Endpoint
 	end := router.Group("/api/reef-metrics/v1")
