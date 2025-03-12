@@ -2,9 +2,12 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/ljb6/frc-reef-metrics/controller"
 )
 
 func initializeRoutes(router *gin.Engine) {
+
+	StatsController := controller.NewRobotStatsController()
 
 	// Endpoint
 	end := router.Group("/api/reef-metrics/v1")
@@ -15,4 +18,7 @@ func initializeRoutes(router *gin.Engine) {
 			"message": "pong",
 		})
 	})
+
+	// Matches test
+	end.GET("/matches", StatsController.GetMatches)
 }
