@@ -1,5 +1,7 @@
 package main
 
+import router "github.com/ljb6/frc-reef-metrics/routes"
+
 func main() {
 
 	// dbConnection, err := db.ConnectDB()
