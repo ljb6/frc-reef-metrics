@@ -32,5 +32,5 @@ func initializeRoutes(router *gin.Engine) {
 	})
 
 	// Matches test
-	end.GET("/matches", StatsController.GetMatches)
+	end.GET("/matches", StatsController.GetRows)
 }

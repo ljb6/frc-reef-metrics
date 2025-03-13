@@ -17,9 +17,9 @@ func NewStatsController(usecase usecase.StatsUsecase) StatsController {
 	}
 }
 
-func (r *StatsController) GetMatches(ctx *gin.Context) {
+func (r *StatsController) GetRows(ctx *gin.Context) {
 
-	stats, err := r.statsUsecase.GetMatches()
+	stats, err := r.statsUsecase.GetRows()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 	}

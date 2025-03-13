@@ -15,6 +15,6 @@ func NewStatsUsecase(repo repository.StatsRepository) StatsUsecase {
 	}
 }
 
-func (su *StatsUsecase) GetMatches() ([]models.MatchStats, error) {
-	return nil, nil
+func (su *StatsUsecase) GetRows() ([]models.MatchStats, error) {
+	return su.repository.GetRows() 
 }
