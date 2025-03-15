@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/ljb6/frc-reef-metrics/models"
@@ -34,6 +35,8 @@ func (r *StatsController) GetTeamData(ctx *gin.Context) {
 	team := ctx.Param("team")
 	fmt.Println(team)
 
+	team_int, _ := strconv.Atoi(team)
+
 	response := models.Response {
 		Message: "Team number can't be null",
 	}
@@ -41,7 +44,7 @@ func (r *StatsController) GetTeamData(ctx *gin.Context) {
 	if team == " " {
 		ctx.JSON(http.StatusInternalServerError, response)
 	} else {
-		stats, err := r.statsUsecase.GetTeamData()
+		stats, err := r.statsUsecase.GetTeamData(team_int)
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, err)
 		}
