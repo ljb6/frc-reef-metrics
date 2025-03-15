@@ -83,3 +83,69 @@ func (sr *StatsRepository) GetRows() ([]models.MatchStats, error) {
 
 	return stats, nil
 }
+
+func (sr *StatsRepository) GetTeamData() ([]models.MatchStats, error) {
+	query := "SELECT name, email, team_number, match_number, match_level, start_zone, " +
+	"auto_left, auto_l1_corals, auto_l2_corals, auto_l3_corals, auto_l4_corals, auto_processor, auto_net, " +
+	"tele_l1_corals, tele_l2_corals, tele_l3_corals, tele_l4_corals, tele_processor, tele_net, " +
+	"end_park, end_climb_attempt, end_climb_level, end_climb_failed, " +
+	"removed_algae, robot_failed, played_defense, trapped_in_algae, end_fouls, comments " +
+	"FROM robot_match_stats"
+
+	rows, err := sr.conn.Query(query)
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+
+	var stats []models.MatchStats
+	var stat models.MatchStats
+
+	for rows.Next() {
+		err = rows.Scan(
+			&stat.Name,
+			&stat.Email,
+			&stat.TeamNumber,
+			&stat.MatchNumber,
+			&stat.MatchLevel,
+			&stat.StartZone,
+	
+			&stat.AutoLeft,
+			&stat.AutoL1Corals,
+			&stat.AutoL2Corals,
+			&stat.AutoL3Corals,
+			&stat.AutoL4Corals,
+			&stat.AutoProcessor,
+			&stat.AutoNet,
+	
+			&stat.TeleL1Corals,
+			&stat.TeleL2Corals,
+			&stat.TeleL3Corals,
+			&stat.TeleL4Corals,
+			&stat.TeleProcessor,
+			&stat.TeleNet,
+	
+			&stat.EndPark,
+			&stat.EndClimbAttempt,
+			&stat.EndClimbLevel,
+			&stat.EndClimbFailed,
+	
+			&stat.RemovedAlgae,
+			&stat.RobotFailed,
+			&stat.PlayedDefense,
+			&stat.TrappedInAlgae,
+			&stat.EndFouls,
+			&stat.Comments,
+		)
+		if err != nil {
+			fmt.Println(err)
+			return nil, err
+		}
+		fmt.Println(stat)
+		stats = append(stats, stat)
+	}
+	
+	rows.Close()
+
+	return stats, nil
+}
