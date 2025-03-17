@@ -87,7 +87,7 @@ func (sr *StatsRepository) GetRows() ([]models.MatchStats, error) {
 	return scanMatchStats(rows)
 }
 
-func (sr *StatsRepository) GetTeamData(team int) ([]models.MatchStats, error) {
+func (sr *StatsRepository) GetTeamData(team string) ([]models.MatchStats, error) {
 
 	query := `
 	SELECT name, email, team_number, match_number, match_level, start_zone,
@@ -109,7 +109,7 @@ func (sr *StatsRepository) GetTeamData(team int) ([]models.MatchStats, error) {
 	return scanMatchStats(rows)
 }
 
-func (sr *StatsRepository) GetMatchData(match int) ([]models.MatchStats, error) {
+func (sr *StatsRepository) GetMatchData(match string) ([]models.MatchStats, error) {
 
 	query := `
 	SELECT name, email, team_number, match_number, match_level, start_zone,

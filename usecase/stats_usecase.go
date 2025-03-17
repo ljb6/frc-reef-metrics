@@ -19,10 +19,10 @@ func (su *StatsUsecase) GetRows() ([]models.MatchStats, error) {
 	return su.repository.GetRows()
 }
 
-func (su *StatsUsecase) GetTeamData(team int) ([]models.MatchStats, error) {
+func (su *StatsUsecase) GetTeamData(team string) ([]models.MatchStats, error) {
 	return su.repository.GetTeamData(team)
 }
 
-func (su *StatsUsecase) GetMatchData(match int) ([]models.MatchStats, error) {
+func (su *StatsUsecase) GetMatchData(match string) ([]models.MatchStats, error) {
 	return su.repository.GetMatchData(match)
 }
