@@ -17,6 +17,56 @@ func NewStatsRepository(conn *sql.DB) StatsRepository {
 	}
 }
 
+func scanMatchStats(rows *sql.Rows) ([]models.MatchStats, error) {
+
+	var stats []models.MatchStats
+
+	for rows.Next() {
+		var stat models.MatchStats
+		err := rows.Scan(
+			&stat.Name,
+			&stat.Email,
+			&stat.TeamNumber,
+			&stat.MatchNumber,
+			&stat.MatchLevel,
+			&stat.StartZone,
+
+			&stat.AutoLeft,
+			&stat.AutoL1Corals,
+			&stat.AutoL2Corals,
+			&stat.AutoL3Corals,
+			&stat.AutoL4Corals,
+			&stat.AutoProcessor,
+			&stat.AutoNet,
+
+			&stat.TeleL1Corals,
+			&stat.TeleL2Corals,
+			&stat.TeleL3Corals,
+			&stat.TeleL4Corals,
+			&stat.TeleProcessor,
+			&stat.TeleNet,
+
+			&stat.EndPark,
+			&stat.EndClimbAttempt,
+			&stat.EndClimbLevel,
+			&stat.EndClimbFailed,
+
+			&stat.RemovedAlgae,
+			&stat.RobotFailed,
+			&stat.PlayedDefense,
+			&stat.TrappedInAlgae,
+			&stat.EndFouls,
+		)
+		if err != nil {
+			fmt.Println(err)
+			return nil, err
+		}
+		stats = append(stats, stat)
+	}
+
+	return stats, nil
+}
+
 func (sr *StatsRepository) GetRows() ([]models.MatchStats, error) {
 
 	query := "SELECT name, email, team_number, match_number, match_level, start_zone, " +
@@ -34,53 +84,7 @@ func (sr *StatsRepository) GetRows() ([]models.MatchStats, error) {
 
 	defer rows.Close()
 
-	var stats []models.MatchStats
-	var stat models.MatchStats
-
-	for rows.Next() {
-		err = rows.Scan(
-			&stat.Name,
-			&stat.Email,
-			&stat.TeamNumber,
-			&stat.MatchNumber,
-			&stat.MatchLevel,
-			&stat.StartZone,
-
-			&stat.AutoLeft,
-			&stat.AutoL1Corals,
-			&stat.AutoL2Corals,
-			&stat.AutoL3Corals,
-			&stat.AutoL4Corals,
-			&stat.AutoProcessor,
-			&stat.AutoNet,
-
-			&stat.TeleL1Corals,
-			&stat.TeleL2Corals,
-			&stat.TeleL3Corals,
-			&stat.TeleL4Corals,
-			&stat.TeleProcessor,
-			&stat.TeleNet,
-
-			&stat.EndPark,
-			&stat.EndClimbAttempt,
-			&stat.EndClimbLevel,
-			&stat.EndClimbFailed,
-
-			&stat.RemovedAlgae,
-			&stat.RobotFailed,
-			&stat.PlayedDefense,
-			&stat.TrappedInAlgae,
-			&stat.EndFouls,
-		)
-		if err != nil {
-			fmt.Println(err)
-			return nil, err
-		}
-		fmt.Println(stat)
-		stats = append(stats, stat)
-	}
-
-	return stats, nil
+	return scanMatchStats(rows)
 }
 
 func (sr *StatsRepository) GetTeamData(team int) ([]models.MatchStats, error) {
@@ -95,7 +99,6 @@ func (sr *StatsRepository) GetTeamData(team int) ([]models.MatchStats, error) {
 	WHERE team_number = $1`
 
 	rows, err := sr.conn.Query(query, team)
-
 	if err != nil {
 		fmt.Println(err)
 		return nil, err
@@ -103,50 +106,5 @@ func (sr *StatsRepository) GetTeamData(team int) ([]models.MatchStats, error) {
 
 	defer rows.Close()
 
-	var stats []models.MatchStats
-	var stat models.MatchStats
-
-	for rows.Next() {
-		err = rows.Scan(
-			&stat.Name,
-			&stat.Email,
-			&stat.TeamNumber,
-			&stat.MatchNumber,
-			&stat.MatchLevel,
-			&stat.StartZone,
-
-			&stat.AutoLeft,
-			&stat.AutoL1Corals,
-			&stat.AutoL2Corals,
-			&stat.AutoL3Corals,
-			&stat.AutoL4Corals,
-			&stat.AutoProcessor,
-			&stat.AutoNet,
-
-			&stat.TeleL1Corals,
-			&stat.TeleL2Corals,
-			&stat.TeleL3Corals,
-			&stat.TeleL4Corals,
-			&stat.TeleProcessor,
-			&stat.TeleNet,
-
-			&stat.EndPark,
-			&stat.EndClimbAttempt,
-			&stat.EndClimbLevel,
-			&stat.EndClimbFailed,
-
-			&stat.RemovedAlgae,
-			&stat.RobotFailed,
-			&stat.PlayedDefense,
-			&stat.TrappedInAlgae,
-			&stat.EndFouls,
-		)
-		if err != nil {
-			fmt.Println(err)
-			return nil, err
-		}
-		stats = append(stats, stat)
-	}
-
-	return stats, nil
+	return scanMatchStats(rows)
 }
