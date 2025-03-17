@@ -1,0 +1,181 @@
+definitions:
+  models.MatchStats:
+    properties:
+      auto_l1_corals:
+        type: integer
+      auto_l2_corals:
+        type: integer
+      auto_l3_corals:
+        type: integer
+      auto_l4_corals:
+        type: integer
+      auto_left:
+        description: Autonomous
+        type: boolean
+      auto_net:
+        type: integer
+      auto_processor:
+        type: integer
+      comments:
+        type: string
+      email:
+        type: string
+      end_climb_attempt:
+        type: boolean
+      end_climb_failed:
+        type: boolean
+      end_climb_level:
+        type: string
+      end_fouls:
+        type: integer
+      end_park:
+        description: End
+        type: boolean
+      match_level:
+        type: string
+      match_number:
+        type: integer
+      name:
+        description: Pre match
+        type: string
+      played_defense:
+        type: boolean
+      removed_algae:
+        description: Both
+        type: boolean
+      robot_failed:
+        type: boolean
+      start_zone:
+        type: string
+      team_number:
+        type: integer
+      tele_l1_corals:
+        description: Teleop
+        type: integer
+      tele_l2_corals:
+        type: integer
+      tele_l3_corals:
+        type: integer
+      tele_l4_corals:
+        type: integer
+      tele_net:
+        type: integer
+      tele_processor:
+        type: integer
+      trapped_in_algae:
+        type: boolean
+    type: object
+  models.Response:
+    properties:
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /stats:
+    get:
+      description: Retorna uma lista completa das estatísticas coletadas
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.MatchStats'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Obtém todas as linhas de estatísticas
+      tags:
+      - Stats
+  /stats/match/{match}:
+    get:
+      description: Retorna as estatísticas de uma partida pelo número da partida
+      parameters:
+      - description: Número da partida
+        in: path
+        name: match
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.MatchStats'
+        "400":
+          description: 'Erro: Número da partida inválido'
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Erro interno
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Obtém os dados de uma partida
+      tags:
+      - Stats
+  /stats/match/{match}/team/{team}:
+    get:
+      description: Retorna as estatísticas de um time dentro de uma determinada partida
+      parameters:
+      - description: Número da partida
+        in: path
+        name: match
+        required: true
+        type: integer
+      - description: Número do time
+        in: path
+        name: team
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.MatchStats'
+        "400":
+          description: 'Erro: Parâmetros inválidos'
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Erro interno
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Obtém os dados de um time em uma partida específica
+      tags:
+      - Stats
+  /stats/team/{team}:
+    get:
+      description: Retorna as estatísticas de um time específico pelo número
+      parameters:
+      - description: Número do time
+        in: path
+        name: team
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.MatchStats'
+        "400":
+          description: 'Erro: Número do time inválido'
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Erro interno
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Obtém os dados de um time
+      tags:
+      - Stats
+swagger: "2.0"

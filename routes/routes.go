@@ -28,4 +28,5 @@ func initializeRoutes(router *gin.Engine) {
 	end.GET("/matches/:team", StatsController.GetTeamData)
 	end.GET("/match/:match", StatsController.GetMatchData)
 	end.GET("/match/:match/:team", StatsController.GetTeamMatch)
+	
 }
