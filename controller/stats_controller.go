@@ -2,6 +2,7 @@ package controller
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/ljb6/frc-reef-metrics/models"
@@ -32,38 +33,58 @@ func (r *StatsController) GetTeamData(ctx *gin.Context) {
 
 	team := ctx.Param("team")
 
-	//team_int, _ := strconv.Atoi(team)
-
-	response := models.Response{
-		Message: "Team number can't be null",
+	notNumResponse := models.Response{
+		Message: "Team number needs to be a integer.",
+	}
+	noDataResponse := models.Response{
+		Message: "There is no data of this team.",
 	}
 
-	if team == " " {
-		ctx.JSON(http.StatusInternalServerError, response)
-	} else {
-		stats, err := r.statsUsecase.GetTeamData(team)
-		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, err)
-		}
-		ctx.JSON(http.StatusOK, stats)
+	_, err := strconv.Atoi(team)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, notNumResponse)
+		return
 	}
+
+	stats, err := r.statsUsecase.GetTeamData(team)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, err)
+	}
+
+	if stats == nil {
+		ctx.JSON(http.StatusInternalServerError, noDataResponse)
+		return
+	}
+
+	ctx.JSON(http.StatusOK, stats)
 }
 
 func (r *StatsController) GetMatchData(ctx *gin.Context) {
 
 	match := ctx.Param("match")
 
-	response := models.Response{
-		Message: "Match number can't be null",
+	notNumResponse := models.Response{
+		Message: "Match number needs to be a integer.",
+	}
+	noDataResponse := models.Response{
+		Message: "There is no data of this team.",
 	}
 
-	if match == "" {
-		ctx.JSON(http.StatusInternalServerError, response)
-	} else {
-		stats, err := r.statsUsecase.GetMatchData(match)
-		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, err)
-		}
-		ctx.JSON(http.StatusOK, stats)
+	_, err := strconv.Atoi(match)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, notNumResponse)
+		return
 	}
+
+	stats, err := r.statsUsecase.GetMatchData(match)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, err)
+	}
+
+	if stats == nil {
+		ctx.JSON(http.StatusInternalServerError, noDataResponse)
+		return
+	}
+
+	ctx.JSON(http.StatusOK, stats)
 }

@@ -1,6 +1,8 @@
 package usecase
 
 import (
+	"log"
+
 	"github.com/ljb6/frc-reef-metrics/models"
 	"github.com/ljb6/frc-reef-metrics/repository"
 )
@@ -16,6 +18,7 @@ func NewStatsUsecase(repo repository.StatsRepository) StatsUsecase {
 }
 
 func (su *StatsUsecase) GetRows() ([]models.MatchStats, error) {
+	log.Println("Searching for all matches...")
 	return su.repository.GetRows()
 }
 
