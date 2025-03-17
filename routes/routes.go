@@ -21,15 +21,8 @@ func initializeRoutes(router *gin.Engine) {
 	StatsUseCase := usecase.NewStatsUsecase(StatsRepository)
 	StatsController := controller.NewStatsController(StatsUseCase)
 
-	// Endpoint
+	// Endpoints
 	end := router.Group("/api/reef-metrics/v1")
-
-	// Test
-	end.GET("/ping", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H {
-			"message": "pong",
-		})
-	})
 
 	end.GET("/all-matches", StatsController.GetRows)
 	end.GET("/matches/:team", StatsController.GetTeamData)
