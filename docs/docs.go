@@ -15,16 +15,16 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/stats": {
+        "/all-matches": {
             "get": {
-                "description": "Retorna uma lista completa das estatísticas coletadas",
+                "description": "Retorna uma lista completa dos dados coletados",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "Stats"
                 ],
-                "summary": "Obtém todas as linhas de estatísticas",
+                "summary": "Obtém os dados de todas as partidas",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -44,9 +44,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/stats/match/{match}": {
+        "/match/{match}": {
             "get": {
-                "description": "Retorna as estatísticas de uma partida pelo número da partida",
+                "description": "Retorna os dados de uma partida pelo número da partida",
                 "produces": [
                     "application/json"
                 ],
@@ -85,9 +85,9 @@ const docTemplate = `{
                 }
             }
         },
-        "/stats/match/{match}/team/{team}": {
+        "/match/{match}/{team}": {
             "get": {
-                "description": "Retorna as estatísticas de um time dentro de uma determinada partida",
+                "description": "Retorna os dados de um time dentro de uma determinada partida",
                 "produces": [
                     "application/json"
                 ],
@@ -133,16 +133,16 @@ const docTemplate = `{
                 }
             }
         },
-        "/stats/team/{team}": {
+        "/matches/{team}": {
             "get": {
-                "description": "Retorna as estatísticas de um time específico pelo número",
+                "description": "Retorna os dados de um time específico pelo número",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "Stats"
                 ],
-                "summary": "Obtém os dados de um time",
+                "summary": "Obtém os dados coletados de um time",
                 "parameters": [
                     {
                         "type": "integer",

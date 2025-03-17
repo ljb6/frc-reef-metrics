@@ -21,14 +21,14 @@ func NewStatsController(usecase usecase.StatsUsecase) StatsController {
 	}
 }
 
-// GetRows retorna todas as linhas de estatísticas
-// @Summary Obtém todas as linhas de estatísticas
-// @Description Retorna uma lista completa das estatísticas coletadas
+// GetRows retorna os dados de todas as partidas
+// @Summary Obtém os dados de todas as partidas
+// @Description Retorna uma lista completa dos dados coletados
 // @Tags Stats
 // @Produce json
 // @Success 200 {array} models.MatchStats
 // @Failure 500 {object} models.Response
-// @Router /stats [get]
+// @Router /all-matches [get]
 func (r *StatsController) GetRows(ctx *gin.Context) {
 	stats, err := r.statsUsecase.GetRows()
 	if err != nil {
@@ -38,16 +38,16 @@ func (r *StatsController) GetRows(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, stats)
 }
 
-// GetTeamData retorna os dados estatísticos de um time específico
-// @Summary Obtém os dados de um time
-// @Description Retorna as estatísticas de um time específico pelo número
+// GetTeamData retorna todas os dados coletados de um time específico
+// @Summary Obtém os dados coletados de um time
+// @Description Retorna os dados de um time específico pelo número
 // @Tags Stats
 // @Produce json
 // @Param team path int true "Número do time"
 // @Success 200 {object} models.MatchStats
 // @Failure 400 {object} models.Response "Erro: Número do time inválido"
 // @Failure 500 {object} models.Response "Erro interno"
-// @Router /stats/team/{team} [get]
+// @Router /matches/{team} [get]
 func (r *StatsController) GetTeamData(ctx *gin.Context) {
 	team := ctx.Param("team")
 
@@ -78,16 +78,16 @@ func (r *StatsController) GetTeamData(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, stats)
 }
 
-// GetMatchData retorna os dados estatísticos de uma partida específica
+// GetMatchData retorna os dados coletados de uma partida específica
 // @Summary Obtém os dados de uma partida
-// @Description Retorna as estatísticas de uma partida pelo número da partida
+// @Description Retorna os dados de uma partida pelo número da partida
 // @Tags Stats
 // @Produce json
 // @Param match path int true "Número da partida"
 // @Success 200 {object} models.MatchStats
 // @Failure 400 {object} models.Response "Erro: Número da partida inválido"
 // @Failure 500 {object} models.Response "Erro interno"
-// @Router /stats/match/{match} [get]
+// @Router /match/{match} [get]
 func (r *StatsController) GetMatchData(ctx *gin.Context) {
 	match := ctx.Param("match")
 
@@ -118,9 +118,9 @@ func (r *StatsController) GetMatchData(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, stats)
 }
 
-// GetTeamMatch retorna os dados estatísticos de um time em uma partida específica
+// GetTeamMatch retorna os dados de um time em uma partida específica
 // @Summary Obtém os dados de um time em uma partida específica
-// @Description Retorna as estatísticas de um time dentro de uma determinada partida
+// @Description Retorna os dados de um time dentro de uma determinada partida
 // @Tags Stats
 // @Produce json
 // @Param match path int true "Número da partida"
@@ -128,7 +128,7 @@ func (r *StatsController) GetMatchData(ctx *gin.Context) {
 // @Success 200 {object} models.MatchStats
 // @Failure 400 {object} models.Response "Erro: Parâmetros inválidos"
 // @Failure 500 {object} models.Response "Erro interno"
-// @Router /stats/match/{match}/team/{team} [get]
+// @Router /match/{match}/{team} [get]
 func (r *StatsController) GetTeamMatch(ctx *gin.Context) {
 	match := ctx.Param("match")
 	team := ctx.Param("team")

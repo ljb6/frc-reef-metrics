@@ -12,7 +12,7 @@ func InitializeServer() {
 	router := gin.Default()
 
 	// Swagger
-	docs.SwaggerInfo.BasePath = "/api/v1"
+	docs.SwaggerInfo.BasePath = "/api/reef-metrics/v1"
 
 	// Initialize the routes
 	initializeRoutes(router)

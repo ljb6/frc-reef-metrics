@@ -73,9 +73,9 @@ definitions:
 info:
   contact: {}
 paths:
-  /stats:
+  /all-matches:
     get:
-      description: Retorna uma lista completa das estatísticas coletadas
+      description: Retorna uma lista completa dos dados coletados
       produces:
       - application/json
       responses:
@@ -89,12 +89,12 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.Response'
-      summary: Obtém todas as linhas de estatísticas
+      summary: Obtém os dados de todas as partidas
       tags:
       - Stats
-  /stats/match/{match}:
+  /match/{match}:
     get:
-      description: Retorna as estatísticas de uma partida pelo número da partida
+      description: Retorna os dados de uma partida pelo número da partida
       parameters:
       - description: Número da partida
         in: path
@@ -119,9 +119,9 @@ paths:
       summary: Obtém os dados de uma partida
       tags:
       - Stats
-  /stats/match/{match}/team/{team}:
+  /match/{match}/{team}:
     get:
-      description: Retorna as estatísticas de um time dentro de uma determinada partida
+      description: Retorna os dados de um time dentro de uma determinada partida
       parameters:
       - description: Número da partida
         in: path
@@ -151,9 +151,9 @@ paths:
       summary: Obtém os dados de um time em uma partida específica
       tags:
       - Stats
-  /stats/team/{team}:
+  /matches/{team}:
     get:
-      description: Retorna as estatísticas de um time específico pelo número
+      description: Retorna os dados de um time específico pelo número
       parameters:
       - description: Número do time
         in: path
@@ -175,7 +175,7 @@ paths:
           description: Erro interno
           schema:
             $ref: '#/definitions/models.Response'
-      summary: Obtém os dados de um time
+      summary: Obtém os dados coletados de um time
       tags:
       - Stats
 swagger: "2.0"
