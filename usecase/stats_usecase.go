@@ -29,3 +29,7 @@ func (su *StatsUsecase) GetTeamData(team string) ([]models.MatchStats, error) {
 func (su *StatsUsecase) GetMatchData(match string) ([]models.MatchStats, error) {
 	return su.repository.GetMatchData(match)
 }
+
+func (su *StatsUsecase) GetTeamMatch(match, team string) ([]models.MatchStats, error) {
+	return su.repository.GetTeamMatch(match, team)
+}

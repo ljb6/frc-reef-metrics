@@ -88,3 +88,24 @@ func (r *StatsController) GetMatchData(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, stats)
 }
+
+func (r *StatsController) GetTeamMatch(ctx *gin.Context) {
+	match := ctx.Param("match")
+	team := ctx.Param("team")
+
+	noDataResponse := models.Response{
+		Message: "There is no data of this team and match.",
+	}
+
+	stats, err := r.statsUsecase.GetTeamMatch(match, team)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, err)
+	}
+
+	if stats == nil {
+		ctx.JSON(http.StatusInternalServerError, noDataResponse)
+		return
+	}
+
+	ctx.JSON(http.StatusOK, stats)
+}
