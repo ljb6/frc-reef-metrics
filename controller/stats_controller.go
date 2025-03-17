@@ -37,7 +37,7 @@ func (r *StatsController) GetTeamData(ctx *gin.Context) {
 
 	team_int, _ := strconv.Atoi(team)
 
-	response := models.Response {
+	response := models.Response{
 		Message: "Team number can't be null",
 	}
 

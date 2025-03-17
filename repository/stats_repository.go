@@ -12,19 +12,19 @@ type StatsRepository struct {
 }
 
 func NewStatsRepository(conn *sql.DB) StatsRepository {
-	 return StatsRepository {
+	return StatsRepository{
 		conn: conn,
-	 }
-} 
+	}
+}
 
 func (sr *StatsRepository) GetRows() ([]models.MatchStats, error) {
-	
+
 	query := "SELECT name, email, team_number, match_number, match_level, start_zone, " +
-	"auto_left, auto_l1_corals, auto_l2_corals, auto_l3_corals, auto_l4_corals, auto_processor, auto_net, " +
-	"tele_l1_corals, tele_l2_corals, tele_l3_corals, tele_l4_corals, tele_processor, tele_net, " +
-	"end_park, end_climb_attempt, end_climb_level, end_climb_failed, " +
-	"removed_algae, robot_failed, played_defense, trapped_in_algae, end_fouls, comments " +
-	"FROM robot_match_stats"
+		"auto_left, auto_l1_corals, auto_l2_corals, auto_l3_corals, auto_l4_corals, auto_processor, auto_net, " +
+		"tele_l1_corals, tele_l2_corals, tele_l3_corals, tele_l4_corals, tele_processor, tele_net, " +
+		"end_park, end_climb_attempt, end_climb_level, end_climb_failed, " +
+		"removed_algae, robot_failed, played_defense, trapped_in_algae, end_fouls, comments " +
+		"FROM robot_match_stats"
 
 	rows, err := sr.conn.Query(query)
 	if err != nil {
@@ -33,7 +33,7 @@ func (sr *StatsRepository) GetRows() ([]models.MatchStats, error) {
 	}
 
 	defer rows.Close()
-	
+
 	var stats []models.MatchStats
 	var stat models.MatchStats
 
@@ -45,7 +45,7 @@ func (sr *StatsRepository) GetRows() ([]models.MatchStats, error) {
 			&stat.MatchNumber,
 			&stat.MatchLevel,
 			&stat.StartZone,
-	
+
 			&stat.AutoLeft,
 			&stat.AutoL1Corals,
 			&stat.AutoL2Corals,
@@ -53,19 +53,19 @@ func (sr *StatsRepository) GetRows() ([]models.MatchStats, error) {
 			&stat.AutoL4Corals,
 			&stat.AutoProcessor,
 			&stat.AutoNet,
-	
+
 			&stat.TeleL1Corals,
 			&stat.TeleL2Corals,
 			&stat.TeleL3Corals,
 			&stat.TeleL4Corals,
 			&stat.TeleProcessor,
 			&stat.TeleNet,
-	
+
 			&stat.EndPark,
 			&stat.EndClimbAttempt,
 			&stat.EndClimbLevel,
 			&stat.EndClimbFailed,
-	
+
 			&stat.RemovedAlgae,
 			&stat.RobotFailed,
 			&stat.PlayedDefense,
@@ -115,7 +115,7 @@ func (sr *StatsRepository) GetTeamData(team int) ([]models.MatchStats, error) {
 			&stat.MatchNumber,
 			&stat.MatchLevel,
 			&stat.StartZone,
-	
+
 			&stat.AutoLeft,
 			&stat.AutoL1Corals,
 			&stat.AutoL2Corals,
@@ -123,19 +123,19 @@ func (sr *StatsRepository) GetTeamData(team int) ([]models.MatchStats, error) {
 			&stat.AutoL4Corals,
 			&stat.AutoProcessor,
 			&stat.AutoNet,
-	
+
 			&stat.TeleL1Corals,
 			&stat.TeleL2Corals,
 			&stat.TeleL3Corals,
 			&stat.TeleL4Corals,
 			&stat.TeleProcessor,
 			&stat.TeleNet,
-	
+
 			&stat.EndPark,
 			&stat.EndClimbAttempt,
 			&stat.EndClimbLevel,
 			&stat.EndClimbFailed,
-	
+
 			&stat.RemovedAlgae,
 			&stat.RobotFailed,
 			&stat.PlayedDefense,

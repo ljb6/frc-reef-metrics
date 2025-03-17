@@ -16,9 +16,9 @@ func NewStatsUsecase(repo repository.StatsRepository) StatsUsecase {
 }
 
 func (su *StatsUsecase) GetRows() ([]models.MatchStats, error) {
-	return su.repository.GetRows() 
+	return su.repository.GetRows()
 }
 
 func (su *StatsUsecase) GetTeamData(team int) ([]models.MatchStats, error) {
-	return su.repository.GetTeamData(team) 
-}		
+	return su.repository.GetTeamData(team)
+}
