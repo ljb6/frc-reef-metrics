@@ -33,6 +33,6 @@ func initializeRoutes(router *gin.Engine) {
 
 	end.GET("/matches", StatsController.GetRows)
 	end.GET("/matches/:team", StatsController.GetTeamData)
-	// GET /matches/:match_number
+	end.GET("/match/:match", StatsController.GetMatchData)
 	// GET /teams
 }

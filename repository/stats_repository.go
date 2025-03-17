@@ -108,3 +108,25 @@ func (sr *StatsRepository) GetTeamData(team int) ([]models.MatchStats, error) {
 
 	return scanMatchStats(rows)
 }
+
+func (sr *StatsRepository) GetMatchData(match int) ([]models.MatchStats, error) {
+
+	query := `
+	SELECT name, email, team_number, match_number, match_level, start_zone,
+		auto_left, auto_l1_corals, auto_l2_corals, auto_l3_corals, auto_l4_corals, auto_processor, auto_net,
+		tele_l1_corals, tele_l2_corals, tele_l3_corals, tele_l4_corals, tele_processor, tele_net,
+		end_park, end_climb_attempt, end_climb_level, end_climb_failed,
+		removed_algae, robot_failed, played_defense, trapped_in_algae, end_fouls
+	FROM robot_match_stats 
+	WHERE match_number = $1`
+
+	rows, err := sr.conn.Query(query, match)
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	return scanMatchStats(rows)
+}

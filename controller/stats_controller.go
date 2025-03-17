@@ -51,3 +51,24 @@ func (r *StatsController) GetTeamData(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, stats)
 	}
 }
+
+func (r *StatsController) GetMatchData(ctx *gin.Context) {
+
+	match := ctx.Param("match")
+
+	match_int, _ := strconv.Atoi(match)
+
+	response := models.Response{
+		Message: "Match number can't be null",
+	}
+
+	if match == "" {
+		ctx.JSON(http.StatusInternalServerError, response)
+	} else {
+		stats, err := r.statsUsecase.GetMatchData(match_int)
+		if err != nil {
+			ctx.JSON(http.StatusInternalServerError, err)
+		}
+		ctx.JSON(http.StatusOK, stats)
+	}
+}

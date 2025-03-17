@@ -22,3 +22,7 @@ func (su *StatsUsecase) GetRows() ([]models.MatchStats, error) {
 func (su *StatsUsecase) GetTeamData(team int) ([]models.MatchStats, error) {
 	return su.repository.GetTeamData(team)
 }
+
+func (su *StatsUsecase) GetMatchData(match int) ([]models.MatchStats, error) {
+	return su.repository.GetMatchData(match)
+}
