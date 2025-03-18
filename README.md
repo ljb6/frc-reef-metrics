@@ -35,12 +35,11 @@ The API is functional but currently operates with fictitious data, as the real d
 5. Access the Swagger UI at `http://localhost:8080/swagger/index.html`.
 
 ## Endpoints (Example)
-- `GET /data` - Retrieve stored robotics data
-- `GET /data/:id` - Fetch specific data entry by ID
+- `GET /all-matches` - Retrieve all stored data
+- `GET /matches/{team}` - Fetch specific team matches by team number
+- `GET /match/{match}` - Fetch specific data from a match by match number
+- `GET /match/{match}/{team}` - Fetch specific match of a team bt match and team number
 
 ## Contributing
 Contributions are welcome! Feel free to submit issues or pull requests.
-
-## License
-This project is licensed under the MIT License.
 
