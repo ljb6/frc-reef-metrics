@@ -1,6 +1,14 @@
 services:
-  go_db:
+  frc_reef_metrics:
     container_name: frc_reef_metrics
+    image: frc-reef-metrics-api
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - frc_reef_metrics_db
+  frc_reef_metrics_db:
+    container_name: frc_reef_metrics_db
     image: postgres:12
     environment:
       POSTGRES_PASSWORD: 1234
