@@ -20,8 +20,8 @@ The API is functional but currently operates with fictitious data, as the real d
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/your-repo.git
-   cd your-repo
+   git clone https://github.com/ljb6/frc-reef-metrics
+   cd frc-reef-metrics
    ```
 2. Copy the example environment file and adjust the configurations:
    ```sh
@@ -35,6 +35,7 @@ The API is functional but currently operates with fictitious data, as the real d
 5. Access the Swagger UI at `http://localhost:8080/swagger/index.html`.
 
 ## Endpoints (Example)
+- Endpoint: `"/api/reef-metrics/v1"`
 - `GET /all-matches` - Retrieve all stored data
 - `GET /matches/{team}` - Fetch specific team matches by team number
 - `GET /match/{match}` - Fetch specific data from a match by match number
