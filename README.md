@@ -14,7 +14,7 @@ The API is functional but currently operates with fictitious data, as the real d
 ## Requirements
 - Go 1.21+
 - Docker & Docker Compose
-- PostgreSQL
+- PostgreSQL image
 
 ## Setup
 
@@ -23,16 +23,16 @@ The API is functional but currently operates with fictitious data, as the real d
    git clone https://github.com/ljb6/frc-reef-metrics
    cd frc-reef-metrics
    ```
-2. Copy the example environment file and adjust the configurations:
+2. Build the API image:
    ```sh
-   cp .env.example .env
+   docker build -t frc-reef-metrics-api .
    ```
 3. Start the database and API using Docker:
    ```sh
-   docker-compose up --build
+   docker-compose up -d
    ```
 4. The API will be available at `http://localhost:8080`.
-5. Access the Swagger UI at `http://localhost:8080/swagger/index.html`.
+5. Access the Swagger UI at `http://localhost:8000/swagger/index.html`.
 
 ## Endpoints (Example)
 - Endpoint: `"/api/reef-metrics/v1"`
