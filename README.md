@@ -8,9 +8,6 @@ This is a Go-based API designed to retrieve data collected by our robotics team 
 - Containerized with Docker
 - PostgreSQL as the database
 
-## Current Status
-The API is functional but currently operates with fictitious data, as the real dataset remains private due to the next competition.
-
 ## Requirements
 - Go 1.21+
 - Docker & Docker Compose
